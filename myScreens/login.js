@@ -13,7 +13,9 @@ import { not } from 'react-native-reanimated';
 export default class App extends React.Component {
 
     static navigationOptions = {gestureEnabled: false};
-
+  papi(){
+    alert('daddy');
+  }
   login() {
   
     var user = this.state.email;
@@ -28,12 +30,12 @@ export default class App extends React.Component {
 
     Http.onreadystatechange = (e) => {
      var rt = Http.responseText;
-      console.log(String(rt));
-      console.log(Http.readyState);
+
     if(Http.readyState == 4)
     {
-      if(String(rt) == "true")
+      if(String(rt.substring(0,5)) == "true,")
       {
+        global.data = JSON.parse(rt.substring(5,rt.length));
         console.log("works");
         alert("Success!");
         this.props.navigation.replace('Main');
