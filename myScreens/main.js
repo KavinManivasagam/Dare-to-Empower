@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Button, FlatList} from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Button, FlatList, Alert} from 'react-native';
 import 'react-native-gesture-handler';
 import {ListItem, Body} from "native-base";
 import { NavigationContainer } from '@react-navigation/native';
@@ -53,22 +53,38 @@ export default class App extends React.Component{
       }
     }
       else{
-        const Http = new XMLHttpRequest();
-        const url ='https://script.google.com/macros/s/AKfycbzVgaFEmUfvq52prjdGPU4-4ieUOvWV-IwHYDBlj7me64GIHUc/exec'
-        var data = "?username="+user+"&event="+event+"&date="+date+"&action=cancel";
-        Http.open("GET", String(url+data));
-        Http.send();
-    
-        Http.onreadystatechange = (e) => {
-          var rt = Http.responseText;
-    
-        if(Http.readyState == 4)
-        {
-            var stuff = JSON.parse(rt);
-            this.setState({data: stuff});
-            alert("Successfully cancelled attendance!");
-        }
-        } 
+        Alert.alert(
+          "Cancel Attendance", 
+          "Are you sure you want to cancel your attendance for this event?",
+          [
+          {
+            text: "No"
+          },
+          {
+            text: "Yes", onPress: () =>{
+              const Http = new XMLHttpRequest();
+              const url ='https://script.google.com/macros/s/AKfycbzVgaFEmUfvq52prjdGPU4-4ieUOvWV-IwHYDBlj7me64GIHUc/exec'
+              var data = "?username="+user+"&event="+event+"&date="+date+"&action=cancel";
+              Http.open("GET", String(url+data));
+              Http.send();
+          
+              Http.onreadystatechange = (e) => {
+                var rt = Http.responseText;
+          
+              if(Http.readyState == 4)
+              {
+                  var stuff = JSON.parse(rt);
+                  this.setState({data: stuff});
+                  alert("Successfully cancelled attendance!");
+              }
+              } 
+            }
+          }
+        
+        ],
+        {cancelable: false}  
+        );
+
       }    
     }
 
