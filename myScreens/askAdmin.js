@@ -27,25 +27,13 @@ export default class App extends React.Component {
      var rt = Http.responseText;
       console.log(String(rt));
       console.log(Http.readyState);
-    if(Http.readyState == 4)
-    {
-      if(String(rt) == "The script completed but did not return anything.")
+      if(Http.readyState == 4)
       {
-        console.log("works");
-        alert("Your message has been sent!");
-        //this.props.navigation.navigate(to the signin page)
-        
-
-      }
-      else
-      {
-        console.log("Try sending your email again");
-        alert("Sorry, try again please");
+          console.log("success");
+          alert("Your message has been sent!");
+          this.props.navigation.replace('Login');
       }
     }
-    }
-
-
   }
   state={
     address:"",
@@ -58,8 +46,46 @@ export default class App extends React.Component {
     return (
       
       <View style={styles.container}>
-        <Text style={styles.logo}>Sign up</Text>
+        <Text style={styles.logo}> Ask Admin</Text>
 
+        <View style={styles.inputView} >
+                <TextInput  
+                 style={styles.inputText}
+                    placeholder="Your email address..." 
+                    placeholderTextColor="#003f5c"
+                    onChangeText={text => this.setState({address:text}) }/>
+                 </View>
+
+                <View style={styles.inputView} >
+                <TextInput  
+                style={styles.inputText}
+                    placeholder="Name..." 
+                    placeholderTextColor="#003f5c"
+                    onChangeText={text => this.setState({name:text})}/>
+                </View>
+
+                <View style={styles.inputView} >
+                <TextInput  
+                style={styles.inputText}
+                    placeholder="Admin's email address..." 
+                    placeholderTextColor="#003f5c"
+                    onChangeText={text => this.setState({reply:text})}/>
+                </View>
+
+                <View style={styles.inView}>
+                <TextInput  
+                style={styles.inputText}
+                    placeholder="Message..." 
+                    placeholderTextColor="#003f5c"
+                    onChangeText={text => this.setState({message:text})}/>
+                </View>
+                    
+                <TouchableOpacity 
+                style={styles.loginBtn}
+                onPress={()=>this.needPass()}>
+                 <Text style={{fontWeight:"bold", color:'#465881', fontSize:20}}>Send</Text>
+                 
+                 </TouchableOpacity>
 
 
 
@@ -105,6 +131,15 @@ const styles = StyleSheet.create({
       backgroundColor:"#465881",
       borderRadius:25,
       height:50,
+      marginBottom:20,
+      justifyContent:"center",
+      padding:20
+    },
+    inView:{
+      width:"80%",
+      backgroundColor:"#465881",
+      borderRadius:25,
+      height: 70,
       marginBottom:20,
       justifyContent:"center",
       padding:20

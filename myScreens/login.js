@@ -52,6 +52,12 @@ export default class App extends React.Component {
 
 
   }
+
+  navPlease(){
+    this.props.navigation.navigate('Login');
+
+  }
+
   state={
     email:"",
     password:"",
@@ -87,9 +93,7 @@ export default class App extends React.Component {
           <Text>{this.state.jsonData}</Text>
         </View>
 
-        <TouchableOpacity>
-          <Text style={styles.forgot}>Forgot Password? Ask administrator</Text>
-        </TouchableOpacity>
+        
         
         <TouchableOpacity style={styles.loginBtn}
         onPress={()=>this.login()}>
@@ -98,8 +102,9 @@ export default class App extends React.Component {
         >Login</Text>
         </TouchableOpacity>
         
-        <TouchableOpacity>
-          <Text style={styles.loginText}>Ask admin for login</Text>
+        <TouchableOpacity
+         onPress={()=>this.navPlease()}>
+          <Text style={styles.loginText}>Forgot password? Ask admin for login</Text>
         </TouchableOpacity>
 
       </View>
@@ -145,10 +150,11 @@ const styles = StyleSheet.create({
     height:50,
     alignItems:"center",
     justifyContent:"center",
-    marginTop:40,
+    marginTop:0,
     marginBottom:10
   },
   loginText:{
+    fontSize:11,
     color:"white"
   },
   imageDTE:{
