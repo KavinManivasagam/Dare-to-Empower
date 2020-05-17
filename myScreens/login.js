@@ -54,7 +54,7 @@ export default class App extends React.Component {
   }
 
   navPlease(){
-    this.props.navigation.navigate('Login');
+    this.props.navigation.navigate('Ask');
 
   }
 

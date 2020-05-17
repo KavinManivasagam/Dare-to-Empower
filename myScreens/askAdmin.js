@@ -51,7 +51,7 @@ export default class App extends React.Component {
         <View style={styles.inputView} >
                 <TextInput  
                  style={styles.inputText}
-                    placeholder="Your email address..." 
+                    placeholder="Admin's email address..." 
                     placeholderTextColor="#003f5c"
                     onChangeText={text => this.setState({address:text}) }/>
                  </View>
@@ -67,7 +67,7 @@ export default class App extends React.Component {
                 <View style={styles.inputView} >
                 <TextInput  
                 style={styles.inputText}
-                    placeholder="Admin's email address..." 
+                    placeholder="Your email address..." 
                     placeholderTextColor="#003f5c"
                     onChangeText={text => this.setState({reply:text})}/>
                 </View>
@@ -83,7 +83,7 @@ export default class App extends React.Component {
                 <TouchableOpacity 
                 style={styles.loginBtn}
                 onPress={()=>this.needPass()}>
-                 <Text style={{fontWeight:"bold", color:'#465881', fontSize:20}}>Send</Text>
+                 <Text style={{fontWeight:"bold", color:'white', fontSize:20}}>Send</Text>
                  
                  </TouchableOpacity>
 
