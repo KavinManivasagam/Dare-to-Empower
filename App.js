@@ -4,7 +4,7 @@ import { createAppContainer } from 'react-navigation';
 import log from './myScreens/login';
 import main from './myScreens/main';
 import sign from './myScreens/signUp';
-
+import sen from './myScreens/askAdmin';
 
 export default class AppContainer extends React.Component {
 
@@ -20,6 +20,9 @@ render() {
         SignUp: {
           screen: sign
         },
+        Ask: {
+          screen: sen
+        }
       },
     
         {
