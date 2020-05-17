@@ -5,7 +5,7 @@ import log from './myScreens/login';
 import main from './myScreens/main';
 import sign from './myScreens/signUp';
 import sen from './myScreens/askAdmin';
-
+import map from './myScreens/map';
 export default class AppContainer extends React.Component {
 
 render() {
@@ -22,6 +22,9 @@ render() {
         },
         Ask: {
           screen: sen
+        },
+        Map: {
+          screen: map
         }
       },
     

@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Button, FlatList, Alert} from 'react-native';
 import 'react-native-gesture-handler';
 import {ListItem, Body} from "native-base";
+import * as Location from 'expo-location';
+
 import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import { not } from 'react-native-reanimated';
@@ -88,6 +90,26 @@ export default class App extends React.Component{
       }    
     }
 
+    _OnPress2 = async() =>{
+      var markers = [];
+      for(i=0;i<this.state.data.length;i++){
+        var arr = this.state.data;
+        var x = await Location.geocodeAsync(arr[i].Address);
+        var y = x[0];
+        var marker = {};
+        marker.location = {latitude: y.latitude, longitude: y.longitude};
+        marker.name = arr[i].Name;
+        marker.key = i;
+        marker.address = arr[i].Address;
+        markers.push(marker);
+
+      }
+      global.markers = markers;
+      this.props.navigation.navigate('Map');
+    }
+    _OnPress3(item){
+
+    }
 
     attending(){
       /*const Http = new XMLHttpRequest();
@@ -131,7 +153,7 @@ export default class App extends React.Component{
             </View>
             <TouchableOpacity 
             style={styles.mainBtn}
-            onPress={()=>this._OnPress(item)}
+            onPress={()=>this._OnPress2()}
             >
               <Text style={styles.AttendText}>{textValue}</Text>
             </TouchableOpacity>
