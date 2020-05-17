@@ -13,10 +13,12 @@ import { not } from 'react-native-reanimated';
 export default class App extends React.Component {
 
     static navigationOptions = {gestureEnabled: false};
-
+  papi(){
+    alert('daddy');
+  }
   login() {
   
-    var user = this.state.email;
+    global.user = this.state.email;
     var pword = this.state.password;
     console.log(user);
   
@@ -28,12 +30,12 @@ export default class App extends React.Component {
 
     Http.onreadystatechange = (e) => {
      var rt = Http.responseText;
-      console.log(String(rt));
       console.log(Http.readyState);
     if(Http.readyState == 4)
     {
-      if(String(rt) == "true")
+      if(String(rt.substring(0,5)) == "true,")
       {
+        global.data = JSON.parse(rt.substring(5,rt.length));
         console.log("works");
         alert("Success!");
         this.props.navigation.replace('Main');
@@ -58,8 +60,11 @@ export default class App extends React.Component {
   render(){
     return (
       
-      <View style={styles.container}>
-        <Text style={styles.logo}>DTE</Text>
+      <View style={styles.container}> 
+        <Image
+        style={{width:330, height:150, marginBottom:'10%', borderRadius:40}}
+        source={require('../assets/theDTE.png')}
+        />
         
         
         <View style={styles.inputView} >
@@ -86,8 +91,11 @@ export default class App extends React.Component {
           <Text style={styles.forgot}>Forgot Password? Ask administrator</Text>
         </TouchableOpacity>
         
-        <TouchableOpacity style={styles.loginBtn}>
-        <Button onPress={()=>this.login()} title="Login"/>
+        <TouchableOpacity style={styles.loginBtn}
+        onPress={()=>this.login()}>
+        <Text
+        style={{fontWeight:"bold", color:'#fff', fontSize:20}}
+        >Login</Text>
         </TouchableOpacity>
         
         <TouchableOpacity>

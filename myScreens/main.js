@@ -1,41 +1,85 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Button, FlatList} from 'react-native';
 import 'react-native-gesture-handler';
+import {ListItem, Body} from "native-base";
 import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import { not } from 'react-native-reanimated';
 
 export default class App extends React.Component{
-    eventShow() {
-    const Http = new XMLHttpRequest();
-    const url ='https://script.google.com/macros/s/AKfycbzVgaFEmUfvq52prjdGPU4-4ieUOvWV-IwHYDBlj7me64GIHUc/exec?action=showEvents'
-    Http.open("GET", String(url));
-    Http.send();
+    state={
+      
+      data: global.data,
+      toggle: false,
+      use: global.user,
 
-    Http.onreadystatechange = (e) => {
-      var right = true;
-      var rt = Http.responseText;
-      console.log(String(rt));
-      console.log(Http.readyState);
-      if(right){
-        return rt; 
-      }
-    }
     }
 
-    Attending(){
-      const Http = new XMLHttpRequest();
+    _OnPress(){
+      const newState = !this.state.toggle;
+      this.setState({toggle: newState})
+      
+    }
+
+
+    attending(){
+      /*const Http = new XMLHttpRequest();
       const url ='https://script.google.com/macros/s/AKfycbzVgaFEmUfvq52prjdGPU4-4ieUOvWV-IwHYDBlj7me64GIHUc/exec?action=showEvents?action=add'
-      Http.open("Get", )
+      Http.open("Get", )*/
+      this.props.navigation.replace('SignUp');
     }
 
     static navigationOptions = {gestureEnabled: false};
+    _renderItem = ({ item }) => {
+      const {toggle} = this.state;
+      const textValue = toggle?"Attend":"Cancel";
+      return (
+      
+          <ListItem style={{ marginLeft: 0, backgroundColor: '#465881' }} >
+
+            <View  style = {{width:'70%', flexDirection:'row'}}>
+
+            <Body>
+
+                <Text style={{ marginTop: 5, marginLeft: 10, flex: 1, color: 'white', fontWeight:"bold" }}>Event Name: {item.Name}</Text>
+                <Text style={{ marginTop: 5,marginLeft: 10,flex: 1,  color: 'white' }}>{item.Address}</Text>
+                <Text style={{ marginTop: 5,marginLeft: 10,flex: 1,  color: 'white' }}>{item.Date}</Text>
+                <Text style={{ marginTop: 5,marginLeft: 10,flex: 1,  color: 'white' }}>{item.Time}</Text>
+
+            </Body>
+                  
+
+            </View>
+            <View style={styles.SpcShow}>
+
+            <Text style={{color:'white', fontWeight:"bold"}}>{item.Space}</Text>
+
+            </View>
+            <TouchableOpacity 
+            style={styles.mainBtn}
+            onPress={()=>this._OnPress()}
+            >
+              <Text style={styles.AttendText}>{textValue}</Text>
+            </TouchableOpacity>
+            
+           
+          </ListItem>
+      );
+    };
+    
     render(){
         return(
           <View style={styles.container}>
-          <TouchableOpacity style={styles.loginBtn}>
-          <Button onPress={()=>this.eventShow()} title="showEvent"/>
-          </TouchableOpacity>
+              <View style = {{width:'100%', flex:4, justifyContent: this.state.data.length ==0 ? 'center' : 'flex-start'}}>
+              
+              {this.state.data.length == 0 ? <Text style={{ fontSize: 30 * wid, color: 'white', fontFamily: 'WSB', alignSelf:'center', }}>No Events Available</Text> :<FlatList style={{ width: '100%' }}
+                data={this.state.data}
+                renderItem={this._renderItem}
+                keyExtractor={item => item.id}
+
+              // stickyHeaderIndices={this.state.stickyHeaderIndices}
+              />}
+              </View>              
           </View>
 
         )
@@ -59,6 +103,11 @@ const styles = StyleSheet.create({
       color:"#fb5b5a",
       marginBottom:40
     },
+    AttendText:{
+      fontWeight:"bold", 
+      color:'#fff', 
+      fontSize:16
+    },
     inputView:{
       width:"80%",
       backgroundColor:"#465881",
@@ -76,16 +125,27 @@ const styles = StyleSheet.create({
       color:"white",
       fontSize:11
     },
-    loginBtn:{
-      width:"80%",
+    mainBtn:{
+      width:"25%",
       backgroundColor:"#fb5b5a",
       borderRadius:25,
       height:50,
       alignItems:"center",
       justifyContent:"center",
-      marginTop:40,
-      marginBottom:10
+      marginLeft: 20,
+      
     },
+    SpcShow: {
+      width:"9%",
+      backgroundColor:"#fb5b5a",
+      borderRadius:100,
+      height:31,
+      alignItems:"center",
+      justifyContent:"center",
+      marginLeft: -27,
+      
+    },
+
     loginText:{
       color:"white"
     },
