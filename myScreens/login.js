@@ -30,7 +30,6 @@ export default class App extends React.Component {
 
     Http.onreadystatechange = (e) => {
      var rt = Http.responseText;
-
     if(Http.readyState == 4)
     {
       if(String(rt.substring(0,5)) == "true,")
