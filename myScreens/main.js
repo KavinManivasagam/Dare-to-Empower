@@ -176,6 +176,8 @@ export default class App extends React.Component{
 
               // stickyHeaderIndices={this.state.stickyHeaderIndices}
               />}
+
+              
               </View>              
           </View>
 
