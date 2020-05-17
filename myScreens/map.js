@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Animated, Dimensions, Alert, AsyncStorage, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Animated, Dimensions, Alert, AsyncStorage, TouchableOpacity, Image } from "react-native";
 import MapView from "react-native-maps";
 import { Marker } from 'react-native-maps';
 
@@ -129,20 +129,32 @@ export default class App extends Component {
         <MapView
             style = {styles.container}
             region={this.state.mapRegion}
+            ref={mapRef => mapRef===null ? null : mapRef.fitToElements(true) }
+
         >
             <Marker
                 coordinate={this.state.location}
                 title={'Your Location'}
+                >
+                    <Image source={require('..//assets/yourloc.png')} style={{ width: 35, height: 35 }} />
+
+                </Marker>
+
             
-            />
+
             {this.state.markers.map(marker => (
             <Marker
-                coordinate={marker.location}
-                title={marker.name}
-                onPress={() => this._OnPress(marker)}
-                pinColor={'#0000FF'}
-                key = {marker.key}
-            />))}
+            coordinate={marker.location}
+            title={marker.name}
+            onPress={() => this._OnPress(marker)}
+            pinColor={'#0000FF'}
+            key = {marker.key}
+            >
+                <Image source={require('..//assets/pointer.png')} style={{ width: 35, height: 35 }} />
+
+            </Marker>
+
+            ))}
         </MapView>
 
       );
