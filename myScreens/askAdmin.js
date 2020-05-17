@@ -15,7 +15,7 @@ export default class App extends React.Component {
     var mess = this.state.message;
     var nombre = this.state.name;
     var rep = this.state.reply;
-    console.log(user);
+
   //exec?action=ask&address=kavin.manivasagam@vhhscougars.org&message=no&name=kavin&reply=kavin.play@gmail.com
     const Http = new XMLHttpRequest();
     const url ='https://script.google.com/macros/s/AKfycbzVgaFEmUfvq52prjdGPU4-4ieUOvWV-IwHYDBlj7me64GIHUc/exec?action=ask'
