@@ -38,11 +38,12 @@ export default class App extends React.Component{
     static navigationOptions = {gestureEnabled: false};
     _renderItem = ({ item }) => {
 
-      const {toggle} = this.state;
-      const textValue = toggle?"Attend":"Cancel";
-      return (
+      console.log(item.Signed);
+      const textValue = item.Signed?"Cancel":"Attend";
+    
+     return(          
       
-          <ListItem style={{ marginLeft: 0, backgroundColor: '#465881' }} >
+      <ListItem style={{ marginLeft: 0, backgroundColor: '#465881' }} >
 
             <View  style = {{width:'70%', flexDirection:'row'}}>
 
@@ -68,10 +69,12 @@ export default class App extends React.Component{
             >
               <Text style={styles.AttendText}>{textValue}</Text>
             </TouchableOpacity>
+            </ListItem>
+            )
             
            
 
-    };
+    }
     
     render(){
         return(
@@ -91,9 +94,10 @@ export default class App extends React.Component{
         )
 
     }
+    
 
 
-}
+  }
 
 
 const styles = StyleSheet.create({
