@@ -8,6 +8,7 @@ import { not } from 'react-native-reanimated';
 
 export default class App extends React.Component{
     state={
+
       
       data: global.data,
       toggle: false,
@@ -19,6 +20,7 @@ export default class App extends React.Component{
       const newState = !this.state.toggle;
       this.setState({toggle: newState})
       
+
     }
 
 
@@ -26,11 +28,16 @@ export default class App extends React.Component{
       /*const Http = new XMLHttpRequest();
       const url ='https://script.google.com/macros/s/AKfycbzVgaFEmUfvq52prjdGPU4-4ieUOvWV-IwHYDBlj7me64GIHUc/exec?action=showEvents?action=add'
       Http.open("Get", )*/
+
       this.props.navigation.replace('SignUp');
+
+      alert('signup not implemented yet');
+
     }
 
     static navigationOptions = {gestureEnabled: false};
     _renderItem = ({ item }) => {
+
       const {toggle} = this.state;
       const textValue = toggle?"Attend":"Cancel";
       return (
@@ -63,8 +70,7 @@ export default class App extends React.Component{
             </TouchableOpacity>
             
            
-          </ListItem>
-      );
+
     };
     
     render(){
