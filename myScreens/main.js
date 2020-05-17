@@ -16,11 +16,60 @@ export default class App extends React.Component{
 
     }
 
-    _OnPress(){
-      const newState = !this.state.toggle;
-      this.setState({toggle: newState})
-      
-
+    _OnPress(item){
+       var uname = global.user;
+       var event = item.Name;
+       var date = item.Date;
+      if(!item.Signed){
+        if(item.Space!=0){
+        const Http = new XMLHttpRequest();
+        const url ='https://script.google.com/macros/s/AKfycbzVgaFEmUfvq52prjdGPU4-4ieUOvWV-IwHYDBlj7me64GIHUc/exec'
+        var data = "?username="+user+"&event="+event+"&date="+date+"&action=add";
+        Http.open("GET", String(url+data));
+        Http.send();
+    
+        Http.onreadystatechange = (e) => {
+        var rt = String(Http.responseText);
+        console.log(rt);
+        if(Http.readyState == 4)
+        {
+          if(String(rt.substring(0,5)) == "true,")
+          {
+            global.data = JSON.parse(rt.substring(5,rt.length));
+            this.setState({data:global.data});
+            alert("Successfully signed up!");
+            
+    
+          }
+          else
+          {
+            alert("Server Error, Someone signed up for the last spot at the same time as you. Sorry!");
+          }
+        }
+        }      
+      }
+      else{
+        alert('Sorry! This event is full.');
+      }
+    }
+      else{
+        const Http = new XMLHttpRequest();
+        const url ='https://script.google.com/macros/s/AKfycbzVgaFEmUfvq52prjdGPU4-4ieUOvWV-IwHYDBlj7me64GIHUc/exec'
+        var data = "?username="+user+"&event="+event+"&date="+date+"&action=cancel";
+        Http.open("GET", String(url+data));
+        Http.send();
+    
+        Http.onreadystatechange = (e) => {
+          var rt = Http.responseText;
+    
+        if(Http.readyState == 4)
+        {
+            var stuff = JSON.parse(rt);
+            this.setState({data: stuff});
+            alert("Successfully cancelled attendance!");
+        }
+        } 
+      }    
     }
 
 
@@ -35,10 +84,11 @@ export default class App extends React.Component{
 
     }
 
+
     static navigationOptions = {gestureEnabled: false};
     _renderItem = ({ item }) => {
 
-      console.log(item.Signed);
+      console.log(item.Date);
       const textValue = item.Signed?"Cancel":"Attend";
     
      return(          
@@ -65,7 +115,7 @@ export default class App extends React.Component{
             </View>
             <TouchableOpacity 
             style={styles.mainBtn}
-            onPress={()=>this._OnPress()}
+            onPress={()=>this._OnPress(item)}
             >
               <Text style={styles.AttendText}>{textValue}</Text>
             </TouchableOpacity>
