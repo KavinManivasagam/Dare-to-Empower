@@ -155,9 +155,9 @@ export default class App extends Component {
             </Marker>
 
             ))}
-             <TouchableOpacity style={{width:80, height:80, marginBottom: 45}}>
+             <TouchableOpacity style={{width:80, height:80}} onPress ={() => this.props.navigation.navigate('Main')}>
               <Image
-        style={{width:80, height:80,  marginTop: 550, marginLeft: 155}}
+        style={{width:80, height:80,}}
         source={require('../assets/back.png')}
         />
         </TouchableOpacity>
@@ -172,6 +172,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center'
   },
 
   endPadding: {

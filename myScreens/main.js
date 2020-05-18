@@ -174,7 +174,7 @@ export default class App extends React.Component{
             </View>
             <TouchableOpacity 
             style={styles.mainBtn}
-            onPress={()=>this._OnPress2()}
+            onPress={()=>this._OnPress(item)}
             >
               <Text style={styles.AttendText}>{textValue}</Text>
             </TouchableOpacity>            
@@ -201,15 +201,31 @@ export default class App extends React.Component{
 
               // stickyHeaderIndices={this.state.stickyHeaderIndices}
               />}
-          <TouchableOpacity style={{width:60, height:60, marginBottom: 45}}>
-              <Image
-        style={{width:60, height:60, marginBottom: 50, marginLeft: 155}}
-        source={require('../assets/box.png')}
-        />
-        </TouchableOpacity>
-            
 
-              </View>              
+
+
+              <TouchableOpacity
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignContent: 'center'
+ 
+                }}
+                onPress={this._OnPress2}
+                disabled={this.state.loading}
+
+              >
+                <Image source={require('../assets/box.png')} style={{
+                  height: '25%',
+                  width: '25%',
+                  flex: 1
+
+
+                }} resizeMode="contain"></Image>
+              </TouchableOpacity>
+            
+              </View>
+
           </View>
 
         )
