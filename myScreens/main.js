@@ -192,6 +192,14 @@ export default class App extends React.Component{
     render(){
         return(
           <View style={styles.container}>
+              <View style={{ flex: 1, width: '90%', alignItems: 'center' }}>
+              <Image source={require('../assets/dare.png')} style={{
+                height: '100%',
+                width: '100%',
+                marginTop: '10%',
+                flex: 1,
+              }} resizeMode="contain"></Image>
+              </View>
               <View style = {{width:'100%', flex:4, justifyContent: this.state.data.length ==0 ? 'center' : 'flex-start'}}>
               
               {this.state.data.length == 0 ? <Text style={{ fontSize: 30 * wid, color: 'white', fontFamily: 'WSB', alignSelf:'center', }}>No Events Available</Text> :<FlatList style={{ width: '100%' }}
