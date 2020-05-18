@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Button, FlatList, Alert} from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Button, FlatList, Alert, Linking} from 'react-native';
 import 'react-native-gesture-handler';
 import {ListItem, Body} from "native-base";
 import * as Location from 'expo-location';
+import * as WebBrowser from 'expo-web-browser';
 
 import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -16,6 +17,15 @@ export default class App extends React.Component{
       toggle: false,
       use: global.user,
 
+    }
+    validURL(str) {
+      var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+        '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+      return !!pattern.test(str);
     }
 
     _OnPress(item){
@@ -92,7 +102,11 @@ export default class App extends React.Component{
 
     _OnPress2 = async() =>{
       var markers = [];
-      for(var i=0;i<this.state.data.length;i++){
+
+      for( var i=0;i<this.state.data.length;i++){
+
+
+
         var arr = this.state.data;
         var x = await Location.geocodeAsync(arr[i].Address);
         var y = x[0];
@@ -108,7 +122,14 @@ export default class App extends React.Component{
       this.props.navigation.navigate('Map');
     }
     _OnPress3(item){
+      if(this.validURL(item.Info)){
+        console.log("press")
 
+        Linking.openURL(item.Info);
+      }
+      else{
+        Alert.alert('Description of Event:', item.Info);
+      }
     }
 
     attending(){
@@ -133,7 +154,7 @@ export default class App extends React.Component{
       
       <ListItem style={{ marginLeft: 0, backgroundColor: '#465881' }} >
 
-            <View  style = {{width:'70%', flexDirection:'row'}}>
+        <TouchableOpacity onPress={() => this._OnPress3(item)} style = {{width:'65%'}}>
 
             <Body>
 
@@ -145,7 +166,7 @@ export default class App extends React.Component{
             </Body>
                   
 
-            </View>
+            </TouchableOpacity>
             <View style={styles.SpcShow}>
 
             <Text style={{color:'white', fontWeight:"bold"}}>{item.Space}</Text>
