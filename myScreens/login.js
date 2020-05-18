@@ -103,7 +103,7 @@ export default class App extends React.Component {
         
         <TouchableOpacity
          onPress={()=>this.navPlease()}>
-          <Text style={styles.loginText}>Forgot password? Ask admin for login</Text>
+          <Text style={styles.loginText}>Forgot password? Recover it here</Text>
         </TouchableOpacity>
 
       </View>

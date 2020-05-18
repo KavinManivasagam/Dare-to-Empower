@@ -12,14 +12,11 @@ export default class App extends React.Component {
   needPass() {
   
     var addie = this.state.address;
-    var mess = this.state.message;
-    var nombre = this.state.name;
-    var rep = this.state.reply;
 
   //exec?action=ask&address=kavin.manivasagam@vhhscougars.org&message=no&name=kavin&reply=kavin.play@gmail.com
     const Http = new XMLHttpRequest();
-    const url ='https://script.google.com/macros/s/AKfycbzVgaFEmUfvq52prjdGPU4-4ieUOvWV-IwHYDBlj7me64GIHUc/exec?action=ask'
-    var data = "&address="+addie+"&message="+mess+"&name="+nombre+"&reply"+rep+"";
+    const url ='https://script.google.com/macros/s/AKfycbzVgaFEmUfvq52prjdGPU4-4ieUOvWV-IwHYDBlj7me64GIHUc/exec?action=givePass'
+    var data = "&username="+addie;
     Http.open("GET", String(url+data));
     Http.send();
 
@@ -30,55 +27,29 @@ export default class App extends React.Component {
       if(Http.readyState == 4)
       {
           console.log("success");
-          alert("Your message has been sent!");
+          alert("Your login has been sent!");
           this.props.navigation.replace('Login');
       }
     }
   }
   state={
     address:"",
-    message:"",
-    name:"",
-    reply:"",
     //jsonData:"",
   }
   render(){
     return (
       
       <View style={styles.container}>
-        <Text style={styles.logo}> Ask Admin</Text>
+        <Text style={styles.logo}> Get Password</Text>
 
         <View style={styles.inputView} >
                 <TextInput  
                  style={styles.inputText}
-                    placeholder="Admin's email address..." 
+                    placeholder="Your username" 
                     placeholderTextColor="#003f5c"
                     onChangeText={text => this.setState({address:text}) }/>
                  </View>
 
-                <View style={styles.inputView} >
-                <TextInput  
-                style={styles.inputText}
-                    placeholder="Name..." 
-                    placeholderTextColor="#003f5c"
-                    onChangeText={text => this.setState({name:text})}/>
-                </View>
-
-                <View style={styles.inputView} >
-                <TextInput  
-                style={styles.inputText}
-                    placeholder="Your email address..." 
-                    placeholderTextColor="#003f5c"
-                    onChangeText={text => this.setState({reply:text})}/>
-                </View>
-
-                <View style={styles.inView}>
-                <TextInput  
-                style={styles.inputText}
-                    placeholder="Message..." 
-                    placeholderTextColor="#003f5c"
-                    onChangeText={text => this.setState({message:text})}/>
-                </View>
                     
                 <TouchableOpacity 
                 style={styles.loginBtn}

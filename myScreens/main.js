@@ -102,7 +102,11 @@ export default class App extends React.Component{
 
     _OnPress2 = async() =>{
       var markers = [];
+
       for( var i=0;i<this.state.data.length;i++){
+
+
+
         var arr = this.state.data;
         var x = await Location.geocodeAsync(arr[i].Address);
         var y = x[0];
@@ -173,8 +177,12 @@ export default class App extends React.Component{
             onPress={()=>this._OnPress2()}
             >
               <Text style={styles.AttendText}>{textValue}</Text>
-            </TouchableOpacity>
+            </TouchableOpacity>            
             </ListItem>
+           
+
+
+            
             )
             
            
@@ -193,6 +201,14 @@ export default class App extends React.Component{
 
               // stickyHeaderIndices={this.state.stickyHeaderIndices}
               />}
+          <TouchableOpacity style={{width:60, height:60, marginBottom: 45}}>
+              <Image
+        style={{width:60, height:60, marginBottom: 50, marginLeft: 155}}
+        source={require('../assets/box.png')}
+        />
+        </TouchableOpacity>
+            
+
               </View>              
           </View>
 
@@ -259,6 +275,21 @@ const styles = StyleSheet.create({
       justifyContent:"center",
       marginLeft: -27,
       
+    },
+    ImgOpac: {
+      width:"20%",
+      backgroundColor:"#465881",
+      borderRadius:100,
+      height:50,
+      alignItems:"center",
+      justifyContent:"center",
+      marginLeft: 50,
+      
+    },
+    iconButton:{
+    position: 'absolute',
+    bottom:0,
+    left:0,
     },
 
     loginText:{
