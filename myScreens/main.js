@@ -197,6 +197,7 @@ export default class App extends React.Component{
                 height: '100%',
                 width: '100%',
                 marginTop: '10%',
+                marginBottom: '1%',
                 flex: 1,
               }} resizeMode="contain"></Image>
               </View>
@@ -215,8 +216,7 @@ export default class App extends React.Component{
               <TouchableOpacity
                 style={{
                   flex: 1,
-                  justifyContent: 'center',
-                  alignContent: 'center'
+                  marginLeft: 160
  
                 }}
                 onPress={this._OnPress2}
@@ -224,8 +224,8 @@ export default class App extends React.Component{
 
               >
                 <Image source={require('../assets/box.png')} style={{
-                  height: '25%',
-                  width: '25%',
+                  height: '40%',
+                  width: '40%',
                   flex: 1
 
 
