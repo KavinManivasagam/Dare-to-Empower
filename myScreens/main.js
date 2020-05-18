@@ -152,7 +152,9 @@ export default class App extends React.Component{
     
      return(          
       
-      <ListItem style={{ marginLeft: 0, backgroundColor: '#465881' }} >
+      <ListItem style={{ marginLeft: 0, backgroundColor: '#465881' }}
+      >
+        
 
         <TouchableOpacity onPress={() => this._OnPress3(item)} style = {{width:'65%'}}>
 
@@ -201,9 +203,10 @@ export default class App extends React.Component{
 
               // stickyHeaderIndices={this.state.stickyHeaderIndices}
               />}
-          <TouchableOpacity style={{width:60, height:60, marginBottom: 45}}>
+          <TouchableOpacity style={{width:60, height:60, marginBottom: 45, marginLeft:162}} 
+          onPress={()=>this.props.navigation.replace('Map')}>
               <Image
-        style={{width:60, height:60, marginBottom: 50, marginLeft: 155}}
+        style={{width:60, height:60}}
         source={require('../assets/box.png')}
         />
         </TouchableOpacity>

@@ -155,12 +155,6 @@ export default class App extends Component {
             </Marker>
 
             ))}
-             <TouchableOpacity style={{width:80, height:80, marginBottom: 45}}>
-              <Image
-        style={{width:80, height:80,  marginTop: 550, marginLeft: 155}}
-        source={require('../assets/back.png')}
-        />
-        </TouchableOpacity>
         </MapView>
 
       );
